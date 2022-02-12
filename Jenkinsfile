@@ -13,6 +13,7 @@ node()
 		sh "$mavenhome/bin/mvn clean package"
 	}
 	
+	/*
 	stage('Execute SonarQube Report')
 	{
 		sh "$mavenhome/bin/mvn sonar:sonar"
@@ -22,6 +23,7 @@ node()
 	{
 		sh "$mavenhome/bin/mvn deploy"
 	}
+	*/
 	
 	stage('Deploying application to Tomcat server')
 	{
