@@ -7,17 +7,16 @@ pipeline
         timestamps()
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '3')
     }
-    triggers {
-  pollSCM '*/1 * * * *'
-}
-
-    
-
+   
     tools 
     {
         maven 'maven_3.8.3'
     }
 
+    triggers 
+    {
+        pollSCM '*/1 * * * *'
+    }
 
     stages
     {
