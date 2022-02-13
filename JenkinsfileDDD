@@ -10,10 +10,7 @@ pipeline
 
     stages
     {
-        input 
-        {
-            message 'kkkkkkkkkkkkkkkkkkk'
-        }
+        
 
         stage('CheckoutCode')
         {
