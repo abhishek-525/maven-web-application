@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mavendeploy
+  namespace: test-ns
+spec:
+  replicas: 4
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 2
+  minReadySeconds: 25
+  selector:
+    matchLabels:
+      app: mavenapp
+  template:
+    metadata:
+      name: mavenpod
+      labels:
+        app: mavenapp
+    spec:
+      containers:
+        - name: maven-container
+          image: dockoom/maven-web-app:bnor
+          ports:
+            - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mavensvc
+  namespace: test-ns
+spec:
+  type: NodePort
+  selector:               # POD labels as selectors
+    app: mavenapp
+  ports:
+  - port: 80
+    targetPort: 8080
